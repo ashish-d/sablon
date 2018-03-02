@@ -128,10 +128,10 @@ class ContentStringTest < Sablon::TestCase
         <w:r>
           <w:t>template</w:t>
           <w:t>a</w:t>
-          <w:br/>
+          <w:cr/>
           <w:t>multiline</w:t>
-          <w:br/>
-          <w:br/>
+          <w:cr/>
+          <w:cr/>
           <w:t>string</w:t>
         </w:r>
       </w:p><w:p>AFTER</w:p>
