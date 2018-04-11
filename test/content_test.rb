@@ -121,20 +121,26 @@ class ContentStringTest < Sablon::TestCase
   end
 
   def test_string_with_newlines
-    Sablon.content(:string, "a\nmultiline\n\nstring").append_to @paragraph, @node, @env
+    Sablon.content(:string, "a\nmultiline\n\nstring\rcarriage-return\n\rin-between").append_to @paragraph, @node, @env
 
     output = <<-XML.gsub(/\s/, '')
       <w:p>
         <w:r>
           <w:t>template</w:t>
           <w:t>a</w:t>
-          <w:cr/>
+          <w:br/>
           <w:t>multiline</w:t>
-          <w:cr/>
-          <w:cr/>
+          <w:br/>
+          <w:br/>
           <w:t>string</w:t>
+          <w:cr/>
+          <w:t>carriage-return</w:t>
+          <w:br/>
+          <w:cr/>
+          <w:t>in-between</w:t>
         </w:r>
-      </w:p><w:p>AFTER</w:p>
+      </w:p>
+      <w:p>AFTER</w:p>
     XML
 
     assert_xml_equal output, @document

@@ -55,8 +55,10 @@ module Sablon
       end
 
       def append_to(paragraph, display_node, env)
-        string.scan(/[^\n]+|\n/).reverse.each do |part|
+        string.scan(/[^\r\n]+|[\r|\n]/).reverse.each do |part|
           if part == "\n"
+            display_node.add_next_sibling Nokogiri::XML::Node.new "w:br", display_node.document
+          elsif part == "\r"
             display_node.add_next_sibling Nokogiri::XML::Node.new "w:cr", display_node.document
           else
             text_part = display_node.dup
